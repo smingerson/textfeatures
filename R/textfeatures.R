@@ -16,7 +16,9 @@
 #' @param normalize Logical indicating whether to normalize (mean center,
 #'   sd = 1) features. Defaults to TRUE.
 #' @param newdata If a textfeatures_model is supplied to text, supply this with
-#'   new data to which you would like to apply the textfeatures_model.
+#'   new data to which you would like to apply the textfeatures_model. See examples
+#'   for how to extract the textfeatures_model from a previous \code{textfeatures()}
+#'   call.
 #' @param verbose A single logical for printing logging messages as work
 #'  progresses.
 #' @return A tibble data frame with extracted features as columns.
@@ -52,6 +54,11 @@
 #'
 #' ## get text features of a data frame with "text" variable
 #' textfeatures(df)
+#'
+#' ## Extract a `textfeatures` model for use on another dataset.
+#' tf <- textfeatures(trump_tweets)
+#' tf_model <- attr(tf, "tf_export", exact = TRUE)
+#' textfeatures(tf_model, newdata = df$text)
 #'
 #' @export
 textfeatures <- function(text,
